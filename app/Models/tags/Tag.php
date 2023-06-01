@@ -12,4 +12,8 @@ class Tag extends Model
         'name',
         'slug'
         ];
+
+        public function name(){
+            return $this->name;
+        }
 }
