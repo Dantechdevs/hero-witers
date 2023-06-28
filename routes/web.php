@@ -6,6 +6,7 @@ use App\Http\Controllers\plans\PlansController;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GigsController;
+use App\Http\Controllers\MpesaSTKPUSHController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,4 +65,7 @@ Route::prefix('gigs')->group(function () {
     //delete gig
     Route::delete('/{id}',[GigsController::class,'destroy'])->name('gigs.destroy');
 });
+Route::post('/v1/mpesatest/stk/push', [MpesaSTKPUSHController::class, 'STKPush']);
 
+// Mpesa STK Push Callback Route
+Route::post('v1/confirm', [MpesaSTKPUSHController::class, 'STKConfirm'])->name('mpesa.confirm');

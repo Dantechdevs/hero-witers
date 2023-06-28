@@ -35,8 +35,8 @@ class TagsController extends Controller
     {
         $request->validate([
 
-            'id' => 'required',
-            'name' => 'required',
+            
+            'tag_name' => 'required',
            
 
         ]);
@@ -50,7 +50,7 @@ class TagsController extends Controller
      */
     public function show(string $id)
     {
-       // return view('admin.tags.show', compact('tags'));
+       // return view('admin.tags.show', compact('tag'));
     }
 
     /**
@@ -58,7 +58,8 @@ class TagsController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin.tags.edit',compact('tags'));
+        $tag = Tag::findOrFail($id);
+        return view('admin.tags.edit',compact('tag'));
     }
 
     /**
@@ -68,8 +69,8 @@ class TagsController extends Controller
     {
         $request->validate([
 
-            'id' => 'required',
-            'name' => 'required',
+            
+            'tag_name' => 'required',
         
         ]);
         $tag->update($request->all());
@@ -82,8 +83,8 @@ class TagsController extends Controller
      */
     public function destroy(string $id)
     {
-        $tags = Tag::findOrFail($id);
-        $tags->delete();
+        $tag = Tag::findOrFail($id);
+        $tag->delete();
         return redirect()->route('tags.index')
             ->with('success', 'Tag deleted successfully');
     }
